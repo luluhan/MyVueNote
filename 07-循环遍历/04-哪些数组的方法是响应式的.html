@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for: 数组的响应式方法</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="item in letters">{{item}}</li>
+    </ul>
+    <button @click="btnClick">添加</button>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        letters: [4, 5, 1, 3, 9]
+      },
+      methods: {
+        btnClick() {
+          //1. push方法
+          this.letters.push('AAA')
+          //2. pop方法
+          this.letters.pop();
+          //3. shift()
+          this.letters.shift();
+          // unshift
+          this.letters.unshift('Z');
+          // splice()
+          this.letters.splice(0, 0, 'POM');
+          // sort()
+          this.letters.sort((a, b) => b - a);
+          // reverse()
+          this.letters.reverse();
+          // set(要修改的对象, 索引值, 修改后的值)
+          Vue.set(this.letters, 0, 'bbbbbb');
+        }
+      }
+    })
+  </script>
+</body>
+</html>

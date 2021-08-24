@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      visibility: hidden;
+    }
+  </style>
+</head>
+<body>
+  <!-- computed 相同的值情况下会有缓存，多次使用，只执行一次，修改会清空缓存重新执行，methods没有缓存-->
+  <div id="app" v-cloak>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{fullName}}</h2>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'Bobi',
+        lastName: 'Brown'
+      },
+      computed: { // 计算属性一般是没有set方法，只读属性
+        fullName: {
+          set: function(newValue) {
+            const newValues = newValue.split('');
+            this.firstName = newValues[0];
+            this.lastName = newValues[1];
+          },
+          get: function() {
+            console.log('computed');
+            return this.firstName + ' ' + this.lastName;
+          }
+        }
+      },
+      methods: {
+        getFullName: function() {
+          console.log('methods');
+          return this.firstName + '·' + this.lastName
+        }
+      }
+    })
+  </script>
+</body>
+</html>

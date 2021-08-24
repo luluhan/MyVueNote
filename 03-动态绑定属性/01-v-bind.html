@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-bind: 动态绑定属性</title>
+  <style>
+    [v-cloak] {
+      visibility: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <h2>{{message}}</h2>
+    <img v-bind:src="imgUrl" :alt="alt" :title="message"/>
+    <a v-bind:href="url">baiduyixia</a>
+    <img :src="imgUrl" :alt="alt"/>
+    <a :href="url">baiduyixia</a>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好呀',
+        imgUrl: 'https://img.alicdn.com/tfs/TB1x7TyENYaK1RjSZFnXXa80pXa-502-380.jpg_400x400q90.jpg',
+        alt: 'bobo',
+        url: 'https://www.baidu.com'
+      },
+      computed: {
+        
+      }
+    })
+  </script>
+</body>
+</html>

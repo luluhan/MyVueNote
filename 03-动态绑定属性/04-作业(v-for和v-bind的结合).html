@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for && v-bind</title>
+  <style>
+    [v-cloak] {
+      visibility: hidden;
+    }
+    li {
+      cursor: pointer;
+    }
+    li:hover {
+      color: red;
+    }
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <ul>
+      <li
+        v-for="(item, index) in movies"
+        :class="{active: current === index}"
+        @click="selectItem(index)"
+      >
+        {{item}}
+      </li>
+    </ul>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        current: 0,
+        movies: ['星际迷航', '盗梦空间', '大鱼', '罗马假日']
+      },
+      methods: {
+        selectItem: function(index) {
+          this.current = index
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on</title>
+</head>
+<body>
+  <div id="app">
+    <h2>{{counter}}</h2>
+    <button @click="increment"> +1 </button>
+    <button @click="sub"> -1 </button>
+    <!-- 函数有入参的时候没有传的情况下，传递Event-->
+    <button @click="btnClick">按钮1</button>
+    <!-- $event传递Event-->
+    <button @click="btnClick2('abc', $event)">按钮2</button>
+    <!-- .stop 阻止冒泡-->
+    <div @click="divClick">
+      <button @click.stop="innerClick">innerBtn</button>
+    </div>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        counter: 0,
+      },
+      methods: {
+        increment() {
+          return this.counter++
+        },
+        sub() {
+          return this.counter--
+        },
+        btnClick(event) {
+          console.log('event', event)
+        },
+        btnClick2(abc, event) {
+          console.log('+++++', abc, event)
+        },
+        divClick() {
+          console.log('divClick');
+        },
+        innerClick() {
+          console.log('innerClick');
+        }
+      }
+    })
+  </script>
+</body>
+</html>

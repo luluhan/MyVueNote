@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on</title>
+</head>
+<body>
+  <div id="app">
+    <!--1  .stop 阻止冒泡 stopPropagation()-->
+    <div @click="divClick">
+      <button @click.stop="innerClick">innerBtn</button>
+    </div>
+    <!--2  .prevent 阻止默认事件 preventDefault() -->
+    <form action="baidu">
+      <input type="submit" @click.prevent="submitClick" text="提交"/>
+    </form>
+    <!--3 .监听按键点击 .{keycode | keyAlias}-->
+    <input type="text" @keyup.13="enter" />
+    <input type="text" @keyup.enter="enter" />
+
+    <!--4 .once 只触发一次-->
+    <button @click.once="onceClick">once</button>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      methods: {
+        divClick() {
+          console.log('divClick');
+        },
+        innerClick() {
+          console.log('innerClick');
+        },
+        submitClick() {
+          console.log('submitClick');
+        },
+        enter() {
+          console.log('enter keyup');
+        },
+        onceClick() {
+          console.log('once');
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-if</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 元素复用问题，添加不同的key -->
+    <template v-if="!isEmail">
+      <label for="userName">用户账号</label>
+      <input id="userName" type="text" placeholder="用户账号登录" key="username"/>
+    </template>
+    <template v-else>
+      <label for="email">用户邮箱</label>
+      <input id="email" type="text" placeholder="用户邮箱登录" key="email"/>
+    </template>
+    
+    <button @click="switchUser()">切换账号</button>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        isEmail: false,
+      },
+      methods: {
+        switchUser() {
+          this.isEmail = !this.isEmail;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

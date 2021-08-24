@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on</title>
+</head>
+<body>
+  <div id="app">
+    <h2>{{counter}}</h2>
+    <!-- 函数有入参的时候没有传的情况下，传递Event-->
+    <button @click="btnClick">按钮1</button>
+    <!-- $event传递Event-->
+    <button @click="btnClick2('abc', $event)">按钮2</button>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        counter: 0,
+      },
+      methods: {
+        btnClick(event) {
+          console.log('event', event)
+        },
+        btnClick2(abc, event) {
+          console.log('+++++', abc, event)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

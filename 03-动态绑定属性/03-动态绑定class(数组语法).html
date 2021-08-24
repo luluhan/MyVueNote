@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-bind: 动态绑定class</title>
+  <style>
+    [v-cloak] {
+      visibility: hidden;
+    }
+    .active {
+      color: red;
+    }
+    .line {
+      text-decoration: underline;
+    }
+    .title {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <h2 :class="[active, line]">message</h2>
+    <h2 :class="getClasses()">message</h2>
+    <button @click="btnClick">Button</button>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好呀',
+        isActive: 'true',
+        isLine: 'true',
+        active: 'aaaa',
+        line: 'bbb',
+      },
+      methods: {
+       btnClick: function() {
+         this.isActive = !this.isActive;
+       },
+       getClasses: function() {
+         return [this.active, this.line]
+       }
+      }
+    })
+  </script>
+</body>
+</html>

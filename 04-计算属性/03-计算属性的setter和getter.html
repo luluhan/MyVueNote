@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2></h2>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'Bobi',
+        lastName: 'Brown'
+      },
+      computed: { // 计算属性一般是没有set方法，只读属性
+        fullName: {
+          set: function(newValue) {
+            const newValues = newValue.split('');
+            this.firstName = newValues[0];
+            this.lastName = newValues[1];
+          },
+          get: function() {
+            return this.firstName + '' + this.lastName;
+          }
+        }
+      },
+    })
+  </script>
+</body>
+</html>

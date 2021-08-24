@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div
+      :style="{fontSize: '50px'}">
+      {{message}}
+    </div>
+    <div
+      :style="{fontSize}">
+      {{message}}
+    </div>
+    <div
+      :style="{fontSize: `${finalSize}px`}">
+      {{message}}
+    </div>
+    <div
+      :style="getStyles()">
+      {{message}}
+    </div>
+    <div :style="[baseStyle1, baseStyle2]">xxxxx</div>
+    <div :style="[{color: 'blue'}, {fontStyle: 'italic'}]">xxxx</div>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+        fontSize: '100px',
+        finalSize: 200,
+        baseStyle1: { color: 'green' },
+        baseStyle2: { fontStyle: 'italic'}
+      },
+      methods: {
+        getStyles: function() {
+          return {fontSize: `${this.finalSize}px`}
+        }
+      }
+    });
+  </script>
+</body>
+</html>
