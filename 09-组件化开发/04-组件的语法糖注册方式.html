@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model</title>
+</head>
+<body>
+  <div id="app">
+    <cnp1></cnp1>
+    <cnp2></cnp2>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 省去了调用Vue.extend()的步骤，而是可以直接使用一个对象来代替
+    // 1、全局组件注册的语法糖
+    Vue.component('cnp1', {
+      template: `
+      <div>
+        <h2>全局组件1</h2>
+        <p>内容1</p>
+      </div>`
+    })
+
+    // 注册局部变量的语法糖
+    const app = new Vue({
+      el: '#app',
+      components: {
+        cnp2: {
+          template: `
+          <div>
+            <h2>局部组件</h2>
+            <p>内容</p>
+          </div>`
+        }
+      }
+    })
+  </script>
+</body>
+</html>

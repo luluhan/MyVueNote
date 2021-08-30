@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model</title>
+</head>
+<body>
+  <div id="app">
+    <cpn :c-info="info"></cpn>
+  </div>
+
+  <pre>
+    v-bind: 不支持驼峰式，用 - 代替
+    eg: cInfo -> :c-info
+    变量名还是使用cInfo
+  </pre>
+
+  <template id="cpn">
+    <h2>{{cInfo}}</h2>
+  </template>
+
+  <template id="child">
+    <div>我是children</div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const cpn = {
+      template: '#cpn',
+      props: {
+        cInfo: {
+          type: Object,
+          default: () => {},
+        }
+      }
+    }
+
+    //root
+    const app = new Vue({
+      el: '#app',
+      data: {
+        info: {
+          name: 'why',
+          age: 1
+        }
+      },
+      components: {
+        cpn,
+      }
+    })
+  </script>
+</body>
+</html>

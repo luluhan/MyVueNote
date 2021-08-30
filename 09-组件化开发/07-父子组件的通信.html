@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model</title>
+</head>
+<body>
+  <div id="app">
+    <partentcpn :cmessage="message" :cmovies="movies"></partentcpn>
+    <pre>
+      子组件是不能引用父组件或者Vue实例的数据的。
+      但是，在开发中，往往一些数据确实需要从上层传递到下层：
+        - 比如在一个页面中，我们从服务器请求到了很多的数据。
+        - 其中一部分数据，并非是我们整个页面的大组件来展示的，而是需要下面的子组件进行展示。
+        - 这个时候，并不会让子组件再次发送一个网络请求，而是直接让大组件(父组件)将数据传递给小组件(子组件)。
+      如何进行父子组件间的通信呢？Vue官方提到：
+        - 通过props向子组件传递数据
+        - 通过事件向父组件发送消息
+    </pre>
+    <pre>
+      props基本用法
+      - 在子组件中，使用选项props来声明需要从父组件接收到的数据。
+      - 在子组件中，使用v-bind来绑定父组件的数据
+    </pre>
+    <pre>
+      props数据验证
+      - 例子中，我们的props选项是使用一个数组。
+      - 除了数组之外，我们也可以使用对象，当需要对props进行类型验证时，就需要对象写法了。
+      - 验证支持的数据类型
+        · String
+        · Number
+        · Boolean
+        · Array
+        · Object
+        · Date
+        · Function
+        · Symbol
+    </pre>
+  </div>
+
+  <template id="parent">
+    <div>
+      我是parents
+      <h2>{{cmessage}}</h2>
+      <ul>
+        <li v-for="item in cmovies">{{item}}</li>
+      </ul>
+      <childcpn></childcpn>
+    </div>
+  </template>
+
+  <template id="child">
+    <div>我是children</div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const childcpn = {
+      template: '#child'
+    }
+
+    // 父传子： props
+    const partentcpn = {
+      template: '#parent',
+      // props: ['cmessage','cmovies'],
+      // props: {
+      //   cmessage: String,
+      //   cmovies: Array,
+      // },
+      props: {
+        cmessage: {
+          type: String,
+          default: 'a default',
+          required: true //必传
+        },
+        // 类型是对象或者数组时，默认值必须是一个函数
+        cmovies:{
+          type: Array,
+          default: () => [],
+        }
+      },
+      data() {
+        return {
+          parentTitle: '我是父级的title',
+        }
+      },
+      components: {
+        childcpn,
+      },
+    }
+
+    //root
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'root message',
+        movies: ['星际迷航', '盗梦空间', '大鱼', '罗马假日']
+      },
+      components: {
+        partentcpn,
+      }
+    })
+  </script>
+</body>
+</html>

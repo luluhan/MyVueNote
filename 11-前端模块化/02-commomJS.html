@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <pre>
+    模块化有两个核心: 导出和导出
+
+    // aaa.js
+    const flag = 1;
+    const sum = (a, b)  => { return a + b;}
+    module.export = {
+      flag,
+      sum,
+    }
+
+    const {flag, sum} = require('../aaa.js');
+  </pre>
+</body>
+</html>

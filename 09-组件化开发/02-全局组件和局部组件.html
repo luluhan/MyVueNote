@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model</title>
+</head>
+<body>
+  <div id="app">
+    <h2>app</h2>
+    <cpn></cpn>
+    <cpnlocal></cpnlocal>
+  </div>
+  <div id="app2">
+    <h2>app2</h2>
+    <cpn></cpn>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    /*
+      当我们通过调用Vue.component()注册组件是，组件的注册是全局的
+      这意味着该组件可以在任意Vue实例下使用。
+
+      如果我们注册的组件是挂载在某个实例中，那么就是一个局部组件
+    */
+    // 注册组件(全局组件，意味着可以在多个Vue的实例下面使用)
+    Vue.component('cpn', {
+      data: () => {
+        return {
+          count: 0
+        }
+      },
+      template: `
+        <div>
+          <h2>组件2</h2>
+          <button @click="add">点击次数: {{this.count}}</button>
+        </div>`,
+      methods: {
+        add() {
+          this.count++
+        }
+      }
+    })
+
+    const cpnc = Vue.extend({
+      template: `
+      <div>
+        <h2>我是一个局部组件</h2>
+      </div>`
+    })
+    // 组件必须挂载在某个Vue实例下，否则它不会生效。
+    const app = new Vue({
+      el: '#app',
+      components: {
+        cpnlocal: cpnc
+      }
+    })
+
+    const app2 = new Vue({
+      el: '#app2',
+    })
+  </script>
+</body>
+</html>

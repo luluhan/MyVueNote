@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>子组件传递给父组件</title>
+</head>
+<body>
+  <!-- 父组件 -->
+  <div id="app">
+    <navcpn @itemclick="cpnClick"></navcpn>
+    <contentcpn :citem="item"></contentcpn>
+  </div>
+  <!-- 子组件 -->
+  <template id="navcpn">
+    <div>
+      <button v-for="item in categories" @click="itemClick(item)">
+        {{item.name}}
+      </button>
+    </div>
+  </template>
+
+  <template id="contentcpn">
+    <div>
+      {{citem.id}} - {{citem.name}}
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 1. 子组件
+    const navcpn = {
+      template: '#navcpn',
+      data() {
+        return {
+          categories: [
+            { id: 123, name: '热门推荐'},
+            { id: 124, name: '手机数码'},
+            { id: 125, name: '家用家电'},
+            { id: 126, name: '电脑办公'},
+          ]
+        }
+      },
+      methods: {
+        itemClick(item) {
+          // 子组件触发事件
+          console.log('子组件触发', item);
+          this.$emit('itemclick', item)
+        }
+      }
+    };
+  
+    const contentcpn = {
+      template: '#contentcpn',
+      props: {
+        citem: {
+          type: Object,
+          default: () => {},
+        }
+      }
+    }
+    // 2. 父组件
+    const app = new Vue({
+      el: '#app',
+      data: {
+        item: {}
+      },
+      components: {
+        navcpn,
+        contentcpn,
+      },
+      methods: {
+        cpnClick(item) {
+          // 监听
+          console.log('父组件监听', item);
+          this.item = Object.assign({}, item);
+        }
+      }
+    })
+  </script>
+</body>
+</html>
